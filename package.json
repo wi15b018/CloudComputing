@@ -1,6 +1,0 @@
-{
-    "dependencies": {
-        "aws-sdk": "^2.141.0",
-        "node-uuid": ">= 1.4.1"
-    }
-}

@@ -1,30 +1,69 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html ng-app="angular-s3-upload">
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Angular AWS S3 Upload</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="components/toastr/toastr.min.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- JavaScript Libs -->
+  <script src="https://sdk.amazonaws.com/js/aws-sdk-2.144.0.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
+  <script src="components/angular/angular.js"></script> 
+  <script src="components/toastr/toastr.min.js"></script>    
+<!-- <script src="components/aws-sdk-js/dist/aws-sdk.min.js"></script> 
+
+  <!-- Our JavaScript -->
+  <script src="js/application.js"></script> 
+  <script src="js/controllers.js"></script>   
+  <script src="js/directives.js"></script>  
 </head>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-<script src="analyzer.js"></script>
-<body ng-app="mainModule">
-  <div ng-controller="mainController">
-<h1>Analyze image:</h1>
-Enter the URL to an image of a natural or artificial landmark, then click the <strong>Analyze image</strong> button.
-<br><br>
-Image to analyze: <input type="text" ng-model="getParam1" ng-init="getParam1 = 'https://www.famousbirthdays.com/headshots/george-clooney-3.jpg'" />
-<button ng-click="postCall()">Image analyzer</button>
-<br><br>
-<div id="wrapper" style="width:1020px; display:table;">
-    <div id="jsonOutput" style="width:600px; display:table-cell;">
-        Response:
-		<pre>{{postCallResult | json}}</pre>
+<body ng-controller="UploadController">
+  <div class="container-fluid">
+    <div class="page-header no-top-marg">
+      <h1>CloudComputing AWS Rekognition</h1>
     </div>
-    <div id="imageDiv" style="width:420px; display:table-cell;">
-        Source image:
-        <br><br>
-        <img ng-src={{inputImage2}} width="400" />
+    <div class="row">
+      <!-- The Upload Form -->
+      <div class="col-md-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Step 1: Upload The File</h3>
+          </div>
+          <div class="panel-body">
+            <input class="bottom-marg-15" type="file" name="file" file></input>
+            <!-- Progress Bar -->
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" aria-valuenow="{{ uploadProgress }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ uploadProgress }}%;">
+                {{ uploadProgress == 0 ? '' : uploadProgress + '%' }}
+              </div>
+            </div>            
+            <a class="btn btn-primary btn-block btn-lg" ng-click="upload()">Upload</a>
+          </div>
+        </div>
+      </div>  
+	<!-- Read Data from Service -->
+      <div class="col-md-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Step 2: Get Amazon Rekognition information</h3>
+          </div>
+          <div class="panel-body">
+            <a class="btn btn-primary btn-block btn-lg" ng-click="postCall()">Analyze uploaded picture</a>
+			<div id="jsonOutput" style="width:600px; display:table-cell;">
+			Response:
+			<pre>{{postCallResult | json}}</pre>
     </div>
-</div>
-</div>
+          </div>
+        </div>
+      </div> 
+    </div>
+  </div>          
 </body>
 </html>
