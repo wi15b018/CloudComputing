@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<script src="analyzer.js"></script>
+<body ng-app="mainModule">
+  <div ng-controller="mainController">
+<h1>Analyze image:</h1>
+Enter the URL to an image of a natural or artificial landmark, then click the <strong>Analyze image</strong> button.
+<br><br>
+Image to analyze: <input type="text" ng-model="getParam1" ng-init="getParam1 = 'https://www.famousbirthdays.com/headshots/george-clooney-3.jpg'" />
+<button ng-click="postCall()">Image analyzer</button>
+<br><br>
+<div id="wrapper" style="width:1020px; display:table;">
+    <div id="jsonOutput" style="width:600px; display:table-cell;">
+        Response:
+		<pre>{{postCallResult | json}}</pre>
+    </div>
+    <div id="imageDiv" style="width:420px; display:table-cell;">
+        Source image:
+        <br><br>
+        <img ng-src={{inputImage2}} width="400" />
+    </div>
+</div>
+</div>
+</body>
+</html>
