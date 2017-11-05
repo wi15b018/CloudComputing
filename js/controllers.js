@@ -8,7 +8,7 @@ controllers.controller('UploadController',['$scope', function($scope) {
   $scope.creds          = {};
   
   $scope.postCall = function () {
-	AWS.config.update({ accessKeyId: 'AKIAJLTPGAOKPLRAGGTA', secretAccessKey: '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' });
+	AWS.config.update({ accessKeyId: '--', secretAccessKey: '--' });
     AWS.config.region = 'us-east-1';
 	var params = {
 	  'Image': {
@@ -29,7 +29,7 @@ controllers.controller('UploadController',['$scope', function($scope) {
   
 
   $scope.upload = function() {
-    AWS.config.update({ accessKeyId: 'AKIAJLTPGAOKPLRAGGTA', secretAccessKey: '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' });
+    AWS.config.update({ accessKeyId: '--', secretAccessKey: '--' });
     AWS.config.region = 'us-east-1';
     var bucket = new AWS.S3({ params: { Bucket: 'wi15b018' } });
     
