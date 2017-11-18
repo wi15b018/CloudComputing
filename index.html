@@ -1,69 +1,50 @@
-<!doctype html>
-<html ng-app="angular-s3-upload">
+<!DOCTYPE html>
+<html lang=''>
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Angular AWS S3 Upload</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!-- Styles -->
-  <link rel="stylesheet" href="components/bootstrap/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="components/toastr/toastr.min.css">
-  <link rel="stylesheet" href="css/style.css">
-
-  <!-- JavaScript Libs -->
-  <script src="https://sdk.amazonaws.com/js/aws-sdk-2.144.0.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
-  <script src="components/angular/angular.js"></script> 
-  <script src="components/toastr/toastr.min.js"></script>    
-<!-- <script src="components/aws-sdk-js/dist/aws-sdk.min.js"></script> 
-
-  <!-- Our JavaScript -->
-  <script src="js/application.js"></script> 
-  <script src="js/controllers.js"></script>   
-  <script src="js/directives.js"></script>  
+	<meta charset='utf-8'>
+	<meta content="IE=edge" http-equiv="X-UA-Compatible">
+	<meta content="width=device-width, initial-scale=1" name="viewport">
+	<link href="./css/styles.css" rel="stylesheet">
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+	<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+	<script src="script.js"></script>
+	<title>CloudComputing</title>
 </head>
-<body ng-controller="UploadController">
-  <div class="container-fluid">
-    <div class="page-header no-top-marg">
-      <h1>CloudComputing AWS Rekognition</h1>
-    </div>
-    <div class="row">
-      <!-- The Upload Form -->
-      <div class="col-md-4">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">Step 1: Upload The File</h3>
-          </div>
-          <div class="panel-body">
-            <input class="bottom-marg-15" type="file" name="file" file></input>
-            <!-- Progress Bar -->
-            <div class="progress">
-              <div class="progress-bar" role="progressbar" aria-valuenow="{{ uploadProgress }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ uploadProgress }}%;">
-                {{ uploadProgress == 0 ? '' : uploadProgress + '%' }}
-              </div>
-            </div>            
-            <a class="btn btn-primary btn-block btn-lg" ng-click="upload()">Upload</a>
-          </div>
-        </div>
-      </div>  
-	<!-- Read Data from Service -->
-      <div class="col-md-4">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">Step 2: Get Amazon Rekognition information</h3>
-          </div>
-          <div class="panel-body">
-            <a class="btn btn-primary btn-block btn-lg" ng-click="postCall()">Analyze uploaded picture</a>
-			<div id="jsonOutput" style="width:600px; display:table-cell;">
-			Response:
-			<pre>{{postCallResult | json}}</pre>
-    </div>
-          </div>
-        </div>
-      </div> 
-    </div>
-  </div>          
+<body>
+	<div id='cssmenu'>
+		<ul>
+			<li class='active'>
+				<a href='./index.html'>Home</a>
+			</li>
+			<li>
+				<a href='./microsoft.html'>Microsoft</a>
+			</li>
+			<li>
+				<a href='./aws.html'>AWS</a>
+			</li>
+			<li>
+				<a href='./google.html'>Google</a>
+			</li>
+		</ul>
+	</div>
+	<h1>From here you can start testing different services</h1>
+	<h2>read me</h2>
+	<h2>Microsoft and Google service</h2>
+	<p>On the navigation bar you can see which services are available</p>
+	<p>Microsoft and Google services work pretty much the same just use different API's</p>
+	<p>Provide the key for the API in the input field which you have received by mail from us.</p>
+	<p>You simply take a .jpg image from the interent and paste the link in the input field</p>
+	<p>Then you might have to wait a little and recieve a .json response and can also see the picture</p>
+	<h2>AWS Service</h2>
+	<p>AWS works a little different to the other two services, you have to upload your picture first from the local environemnt to a so called cloud bucket</p>
+	<p>This bucket then contains your image you'd like to analyze.</p>
+	<p>1. For this service you have to provide your accesskey, secretkey and a existing bucket on your S3 storage</p>
+	<p>2. Then you choose a picture from your environemnt and continue with the upload button</p>
+	<p>3. After succssful upload to the bucket you can continue with clicking the analyte button</p>
+	<p>4. The analyze function takes your uploaded picture and runs the aws analyze service</p>
+	<p>5. You will get a .json response from the API</p>
+	<b>The response might not show up when clicking the analyze button once, just try a second time then it should work :) </b></br>
+	<b>It might be a issue with the callback function which we are not able to solve :/ tried a lot</b></br>
+	<b>Last but not least have fun :) </b>
 </body>
 </html>

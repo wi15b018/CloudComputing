@@ -8,30 +8,28 @@ controllers.controller('UploadController',['$scope', function($scope) {
   $scope.creds          = {};
   
   $scope.postCall = function () {
-	AWS.config.update({ accessKeyId: '--', secretAccessKey: '--' });
+	AWS.config.update({ accessKeyId: $scope.creds.access_key, secretAccessKey: $scope.creds.secret_key });
     AWS.config.region = 'us-east-1';
 	var params = {
 	  'Image': {
-	   'S3Object': {'Bucket' : 'wi15b018', 
-					'Name' : $scope.file.name }
+	   'S3Object': {'Bucket' : $scope.creds.bucket, 
+					'Name' 	 : $scope.file.name }
 	  },
 	  'Attributes' : ['ALL']
 	 };
 
 	var rekognition = new AWS.Rekognition();
 	rekognition.detectFaces(params, function (err, data) {
-	 /* if (err) console.log(err, err.stack);  // an error occurred
-	  else $scope.postCallResult = data;     // successful response*/
 	}).on('success', function(response) {
 	   $scope.postCallResult = response.data;
 	});
-    };
+	
+  };
   
-
   $scope.upload = function() {
-    AWS.config.update({ accessKeyId: '--', secretAccessKey: '--' });
+    AWS.config.update({ accessKeyId: $scope.creds.access_key, secretAccessKey: $scope.creds.secret_key });
     AWS.config.region = 'us-east-1';
-    var bucket = new AWS.S3({ params: { Bucket: 'wi15b018' } });
+    var bucket = new AWS.S3({ params: { Bucket: $scope.creds.bucket } });
     
     if($scope.file) {
         // Perform File Size Check First
@@ -40,8 +38,6 @@ controllers.controller('UploadController',['$scope', function($scope) {
           toastr.error('Sorry, your attachment is too big. <br/> Maximum '  + $scope.fileSizeLabel() + ' file attachment allowed','File Too Large');
           return false;
         }
-        // Prepend Unique String To Prevent Overwrites
-        //var uniqueFileName = $scope.uniqueString() + '-' + $scope.file.name;
         var uniqueFileName = $scope.file.name;
 
         var params = { Key: uniqueFileName, ContentType: $scope.file.type, Body: $scope.file, ServerSideEncryption: 'AES256' };
@@ -77,15 +73,5 @@ controllers.controller('UploadController',['$scope', function($scope) {
     // Convert Bytes To MB
     return Math.round($scope.sizeLimit / 1024 / 1024) + 'MB';
   };
-
-  $scope.uniqueString = function() {
-    var text     = "";
-    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-    for( var i=0; i < 8; i++ ) {
-      text += possible.charAt(Math.floor(Math.random() * possible.length));
-    }
-    return text;
-  }
 
 }]);
